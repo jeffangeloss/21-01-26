@@ -7,13 +7,13 @@ const lista = [
         {
             nombre : "CSGO",
             imagen : "/IMG/csgo.jpg",
-            descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor eros sed semper aliquam. Duis quis tellus libero. Quisque consequat mauris eu molestie vestibulum. Nunc at ligula aliquet, accumsan dui ac, lacinia nulla. Quisque in aliquam nisl. Maecenas faucibus est orci, non facilisis arcu vestibulum ut. Nulla congue dapibus sagittis. Pellentesque et lectus at ante convallis tristique vitae in dolor. Donec varius mauris id enim cursus ultrices. Sed a lobortis quam.",
+            descripcion: "Shooter táctico competitivo donde dos equipos se enfrentan en rondas rápidas de ataque y defensa. La clave está en la puntería, la coordinación y la estrategia: compra de armas, control del mapa y comunicación constante para asegurar el objetivo.",
             categoria : "FPS"
         },
         {
             nombre : "DDLC",
             imagen : "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/698780/capsule_616x353.jpg?t=1681943582",
-            descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor eros sed semper aliquam. Duis quis tellus libero. Quisque consequat mauris eu molestie vestibulum. Nunc at ligula aliquet, accumsan dui ac, lacinia nulla. Quisque in aliquam nisl. Maecenas faucibus est orci, non facilisis arcu vestibulum ut. Nulla congue dapibus sagittis. Pellentesque et lectus at ante convallis tristique vitae in dolor. Donec varius mauris id enim cursus ultrices. Sed a lobortis quam.",
+            descripcion: "Visual novel que empieza como un juego de citas escolar, pero rápidamente se transforma en una experiencia inquietante. Rompe expectativas con giros psicológicos, tensión creciente y una narrativa que juega con el jugador y sus decisiones.",
             categoria : "Horror psicológico"
         }
     ]
