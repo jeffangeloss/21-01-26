@@ -21,9 +21,36 @@ function LoginPage() {
         }
     }, [])
 
+    async function loginHTTP(correo,password){
+        const resp = await fetch("http://127.0.0.1:8000/login",{
+            method: "post",
+            body: JSON.stringify({
+                username: correo,
+                password : password
+            }),
+            headers: {
+                "content-type" : "application/json"
+            }
+        })
+        if (resp.status != 200){
+            // Error en login
+            const data = await resp.json()
+            console.error("ERROR:", data)
+            return false
+        }
 
-    function login(correo, password) {
-        if (correo == "miau" && password == "miau") {
+        const data = await resp.json()
+        if(data.msg == "Acceso concedido"){
+            return true
+        }else{
+            console.error(data.detail)
+            return false
+        }
+    }
+
+    async function login(correo, password) {
+        const resultadoLogin = await loginHTTP(correo,password)
+        if (resultadoLogin) {
             console.log("Login correcto")
             navigate("/main")
 
