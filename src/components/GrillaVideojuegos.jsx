@@ -7,7 +7,7 @@ function GrillaVideojuegos({ listaVideojuegos }) {
             {
                 (function () { // La creas y la ejecutas a la función dentro de la función principal
                     if (listaVideojuegos.length == 0) {
-                        return <div>Cargando...</div>
+                        return <div>No hay videojuegos...</div>
                     } else {
                         {/* Un for no es una expresión js, tenemos que usar los estados */ }
                         {/* Expresión js */ }

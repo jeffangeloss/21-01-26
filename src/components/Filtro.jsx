@@ -13,8 +13,8 @@ function Filtro({categorias, onFiltro}){
                     <option value={"-1"}>Selecione alguna categoría</option>
                     {/* Aquí irían las opciones generadas dinámicamente */
                         categorias.map(function(categoria){
-                            return <option key={categoria} value={categoria}>
-                                {categoria}
+                            return <option key={categoria.id} value={categoria.id}>
+                                {categoria.nombre}
                             </option>
                         })
                     }

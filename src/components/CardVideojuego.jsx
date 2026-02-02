@@ -7,7 +7,7 @@ function CardVideojuego({videojuego}) {
             {videojuego.descripcion}
         </p>
         <span className="text-xs bg-orange-600 rounded-full text-white px-2 py-1">
-            {videojuego.categoria}
+            {videojuego.categoria.nombre}
         </span>
     </div>
 }

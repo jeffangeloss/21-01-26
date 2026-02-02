@@ -21,32 +21,56 @@ const lista = [
 ]
 
 function VideojuegosPage() {
-    const categorias = ["FPS", "Horror psicológico"]
+    const [categorias, setCategorias] = useState([])
     const [listaVideojuegos, setListaVideojuegos] = useState([])
 
     const navigate = useNavigate();
 
     // Queremos que la lista pueda cambiar según el filtro seleccionado, por eso creamos la función filtrar
-    function filtrar(categoria) {
+    // function filtrar(categoria) {
+    //     if (categoria == "-1") {
+    //         setListaVideojuegos(lista)
+    //     } else {
+    //         const listaVideojuegosModificado = lista.filter(function (vj) {
+    //             // la función filter se aplica a cada uno de los elementos de la lista, si el es verdadero el elemento queda en la nueva lista, si es falso se elimina
+    //             return vj.categoria == categoria
+    //             // si su categoria es igual a la seleccionada, lo dejo pasar, si no lo es sale de la nueva lista
+    //         })
+    //         setListaVideojuegos(listaVideojuegosModificado)
+    //     }
+    // }
+
+    // Este filtrado en el front ya no sirve, pero este es solo de frontend, realmente si existe pero... si hacen consultas más grandes se necesita de filtrado en el backend
+
+    // yo le envió al bankend y este me lo devuelve mediante un query parameter, mediante url
+    async function filtrar(categoria) {
+        const URL = "https://script.google.com/macros/s/AKfycbwN_f3ANnjp4W4-MTf-2gmHT3KZZeNPXiQsaeyWEmOlcAzms8TaGk65eyU-z4Neuz_ISg/exec"
+        //const response = await fetch(URL + "?categoria=" + categoria)
+        // hay una forma mejor de hacer esto: interpolación de strings con las comillas invertidas ``
+        // como hacer comillas invertidas: alt + 96
+        let response
         if (categoria == "-1") {
-            setListaVideojuegos(lista)
+            response = await fetch(URL)
         } else {
-            const listaVideojuegosModificado = lista.filter(function (vj) {
-                // la función filter se aplica a cada uno de los elementos de la lista, si el es verdadero el elemento queda en la nueva lista, si es falso se elimina
-                return vj.categoria == categoria
-                // si su categoria es igual a la seleccionada, lo dejo pasar, si no lo es sale de la nueva lista
-            })
-            setListaVideojuegos(listaVideojuegosModificado)
+            response = await fetch(`${URL}?categoria=${categoria}`)
         }
+
+        if (!response.ok) {
+            console.error("Error de pletición. " + response.status)
+            return
+        }
+        const data = await response.json()
+        setListaVideojuegos(data)
     }
+
 
     function logout() {
         localStorage.clear()
         navigate("/")
     }
 
-    async function obtenerVideoJuegosHTTP() {
-        const URL = "https://script.google.com/macros/s/AKfycbxMZbg2ZTtWjfgmRVP25A2Kt6i02_SDLcu1asfc9CKNXDxLISrTxqaoK5pdgBrjmc1Ijw/exec"
+    async function obtenerCategoriasHTTP() {
+        const URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiqUhhn7PlOjq7eGUVydyjNJDRhQogqsVTM5CbQMu2Q3NRVBzQT9bfkY1XLdHbeFp-hxAm-D2fU1wQttcf4BPuzVbV66l79on8Vj7eqS9hOTGiw7LTBZGIKVgwpseUehYq5AUDzLnxlixhXzeb1qwE5V3dQMxRB00rbpBTBxjfItfS7wsQEuRgS0jrDlhgUeQYjVJqYpy1uvexJ03iQxoqpoeJgLy8ivD1ZI2f2Q-ves6GQlwmwcKHxezyfWMwM8pqZBlgOwxN1mtgIjuJt3FrD2Q_dxbARGlKymNpB_mD8T_Fm-3JfZ85uOi6e8g&lib=MwotjRmUun0RLlzJNoicmGhJptMVnD4LO"
         const response = await fetch(URL)
 
         if (!response.ok) {
@@ -55,13 +79,26 @@ function VideojuegosPage() {
         }
 
         const data = await response.json()
-        console.log(data)
+        setCategorias(data)
+    }
+
+    async function obtenerVideoJuegosHTTP() {
+        const URL = "https://script.google.com/macros/s/AKfycbwN_f3ANnjp4W4-MTf-2gmHT3KZZeNPXiQsaeyWEmOlcAzms8TaGk65eyU-z4Neuz_ISg/exec"
+        const response = await fetch(URL)
+
+        if (!response.ok) {
+            console.error("Error de pletición. " + response.status)
+            return
+        }
+
+        const data = await response.json()
         setListaVideojuegos(data)
     }
 
     // Solamente se ejecuta la primera vez que se renderiza el componente
     useEffect(function () {
         obtenerVideoJuegosHTTP()
+        obtenerCategoriasHTTP()
     }, [])
     // Esta función se ejecuta luego de renderizar tu componente
 
