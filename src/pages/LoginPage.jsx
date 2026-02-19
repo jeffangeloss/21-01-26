@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Cabecera from "../components/cabecera"
 import Formulario from "../components/Formulario"
 import Mensaje from "../components/Mensaje"
+import params from "../params"
 import { Link, useNavigate } from "react-router-dom"
 
 function LoginPage() {
@@ -22,7 +23,7 @@ function LoginPage() {
     }, [])
 
     async function loginHTTP(correo,password){
-        const resp = await fetch("http://127.0.0.1:8000/login",{
+        const resp = await fetch(`${params.BACKEND_URL}/login/`,{
             method: "post",
             body: JSON.stringify({
                 username: correo,

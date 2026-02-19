@@ -3,6 +3,7 @@ import Filtro from "../components/Filtro"
 import GrillaVideojuegos from "../components/GrillaVideojuegos"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import params from "../params"
 
 const lista = [
     // Esto lo pediremos desde un servidor para usar fetch
@@ -32,7 +33,7 @@ function VideojuegosPage() {
     }
 
     async function filtrar(categoria) {
-        const URL = "http://127.0.0.1:8000/videojuegos"
+        const URL = `${params.BACKEND_URL}/videojuegos/`
         //const response = await fetch(URL + "?categoria=" + categoria)
         // hay una forma mejor de hacer esto: interpolación de strings con las comillas invertidas ``
         // como hacer comillas invertidas: alt + 96
@@ -56,7 +57,7 @@ function VideojuegosPage() {
     }
 
     async function obtenerVideoJuegosHTTP() {
-        const URL = "http://127.0.0.1:8000/videojuegos"
+        const URL = `${params.BACKEND_URL}/videojuegos/`
         const response = await fetch(URL,{
             headers : {
                 "x-token" : localStorage.getItem("TOKEN")
@@ -73,7 +74,7 @@ function VideojuegosPage() {
     }
 
     async function obtenerCategoriasHTTP() {
-        const URL = "http://127.0.0.1:8000/categorias"
+        const URL = `${params.BACKEND_URL}/categorias/`
         const response = await fetch(URL,{
             headers : {
                 "x-token" : localStorage.getItem("TOKEN")
